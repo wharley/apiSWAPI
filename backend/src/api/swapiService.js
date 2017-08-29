@@ -11,8 +11,8 @@ module.exports = (sequelize) => {
 		    })
 		},
 		get: (req, res) => {
-		    Swapi.findAll().then( teste => {
-				res.json(teste)
+		    Swapi.findAll().then( swapi => {
+				res.json(swapi)
 		    })
 		},
 		delete: (req, res) => {
