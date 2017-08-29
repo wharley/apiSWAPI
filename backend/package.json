@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/loader.js",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start src/loader.js --name apiSWAPI"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "sequelize": "^4.7.5",
+    "sqlite3": "^3.1.9"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0"
+  }
+}
