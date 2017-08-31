@@ -37,6 +37,7 @@ class SwapiForm extends Component {
 	}
 	render() {
 		const { save, refresh } = this.props
+
 		return (
 			<div role="form" className="swapiForm">
 				<Grid cols="12 9 10">
@@ -55,15 +56,15 @@ class SwapiForm extends Component {
 						value={this.state.swapi.opening_crawl}></textarea>
 
 					<input className="form-control" placeholder="Director" name="director"
-						onChange={this.props.change}
+						onChange={this.handleChange}
 						value={this.state.swapi.director}></input>
 
 					<input className="form-control" placeholder="Producer" name="producer"
-						onChange={this.props.handleChange}
+						onChange={this.handleChange}
 						value={this.state.swapi.producer}></input>				
 				</Grid>
 				<Grid cols="12 3 2">
-					<IconButton style="primary" icon="save" onClick={() => this.props.save(this.state.swapi)}></IconButton>
+					<IconButton style="primary" icon="save" onClick={() => this.props.save(this.state.swapi, this.props.swapi.add)}></IconButton>
 				</Grid>
 			</div>			
 		)

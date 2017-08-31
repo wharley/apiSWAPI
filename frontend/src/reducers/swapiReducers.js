@@ -5,13 +5,27 @@ const INITIAL_STATE = {
         title: '',
         episode_id: '',
         opening_crawl: '',
-        producer: '',
+        producer: ''
     },
-    list: [] 
+    list: [] ,
+    add: false
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case 'TODO_CLEAR':
+            return { 
+                ...state, 
+                swapi: {
+                    id: '',
+                    director: '',
+                    title: '',
+                    episode_id: '',
+                    opening_crawl: '',
+                    producer: ''                    
+                }, 
+                add: false 
+            }        
         case 'SWAPI_SEARCHED':
             return { 
                 ...state, 
@@ -26,7 +40,8 @@ export default (state = INITIAL_STATE, action) => {
                     episode_id: action.payload.episode_id,
                     opening_crawl: action.payload.opening_crawl,
                     producer: action.payload.producer
-                } 
+                },
+                add: action.payload.producer
             }
         default:
             return state

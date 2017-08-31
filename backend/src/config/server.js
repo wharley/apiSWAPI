@@ -9,6 +9,7 @@ const server = express()
 const allowCors = require('./cors')
 const Sequelize = require('sequelize')
 const path = require('path')
+const fs = require('fs')
 const { consumeSwapi } = require('../api/swapi')
 
 server.use(bodyParser.urlencoded({ extended: true }))
@@ -23,16 +24,25 @@ const sequelize = new Sequelize({
 
 const swapiService = require('../api/swapiService')(sequelize)
 
-sequelize.sync().then( async () =>  { 
+async function fileExists() {
 
-	await consumeSwapi(sequelize)
+	if(!fs.existsSync(path.join(__dirname, '../db/'))) {
+		await fs.mkdirSync(path.join(__dirname, '../db/'))	
+	}
 
-    server.get(urlApi, swapiService.get)
-    server.post(urlApi, swapiService.create)
-    server.put(urlApi, swapiService.update)
-    server.delete(urlApi, swapiService.delete)
+	sequelize.sync().then( async () =>  { 
 
-    server.listen(port, () => {
-		console.log(`BACKEND is running on port ${port}. `)
-	})
-})
+		await consumeSwapi(sequelize)
+
+	    server.get(urlApi, swapiService.get)
+	    server.post(urlApi, swapiService.create)
+	    server.put(urlApi, swapiService.update)
+	    server.delete(urlApi, swapiService.delete)
+
+	    server.listen(port, () => {
+			console.log(`BACKEND is running on port ${port}. `)
+		})
+	})	
+}
+
+fileExists()

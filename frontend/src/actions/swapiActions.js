@@ -3,11 +3,14 @@ import { toastr } from 'react-redux-toastr'
 
 const URL = 'http://localhost:3003/api/v1/swapi'
 
-export const save = (swapi) => {
+export const save = (swapi, action) => { 
+
+    const method = action ? 'put' : 'post'
+
     return dispatch => {
-        axios.put(URL, swapi)
+        axios[method](URL, swapi)
             .then(resp => {            	
-            	dispatch(refresh())
+            	dispatch(clear())
             })
             .catch(err => toastr.error('Erro', err))
     }
@@ -35,6 +38,11 @@ export const edit = (swapi) => ({
 			title: swapi.title,
 			episode_id: swapi.episode_id,
 			opening_crawl: swapi.opening_crawl,
-			producer: swapi.producer						
+			producer: swapi.producer,
+            add: true
 		}
 })
+
+export const clear = () => {
+    return [{ type: 'TODO_CLEAR' }, refresh()]
+}
