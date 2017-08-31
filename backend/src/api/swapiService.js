@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
 		},
 		get: (req, res) => {
 		    Swapi.findAll({
-		    	order: sequelize.col('episode_id')
+		    	order: sequelize.col('id')
 		    }).then( swapi => {
 				res.json(swapi)
 		    })

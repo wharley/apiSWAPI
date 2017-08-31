@@ -1,8 +1,15 @@
+import '../template/custom.css'
+
 import React from 'react'
+import Menu from '../template/menu'
+import Routes from './routes'
+
+import Messages from '../template/messages'
 
 export default props => (
-    <div className='container-fluid'>
-	<h1>Welcome</h1>
-	<button type="button" className="btn btn-success">Primary</button>
-    </div>
+	<div className="container-fluid">
+		<Menu />
+		<Routes />
+		<Messages />
+	</div>
 )
