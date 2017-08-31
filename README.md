@@ -7,7 +7,7 @@
   ## Linux
       sudo apt-get install sqlite3
   ## Windows e Mac OS
-      [Sqlite](https://www.sqlite.org/)
+      [Sqlite]: https://www.sqlite.org/
   # backend
     Inside the backend run the npm5 i
     npm run dev
