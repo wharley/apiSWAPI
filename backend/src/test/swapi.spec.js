@@ -3,6 +3,7 @@ const request = require('supertest')('http://localhost:3003/api/v1/swapi')
 const expect = require('chai').expect
 const Sequelize = require('sequelize')
 const path = require('path')
+const fs = require('fs')
 const axios = require('axios')
 
 const sequelize = new Sequelize({
@@ -13,8 +14,13 @@ const sequelize = new Sequelize({
 
 const model = require('../config/database')(sequelize)
 
-describe('Testando swapi', () => {
+describe('Testando swapi',() => {
 	beforeEach(done => {
+		
+		if(!fs.existsSync(path.join(__dirname, '../db/'))) {
+			fs.mkdirSync(path.join(__dirname, '../db/'))	
+		}
+
 		sequelize.sync().then( () => {
 			done()
 		})

@@ -24,25 +24,20 @@ const sequelize = new Sequelize({
 
 const swapiService = require('../api/swapiService')(sequelize)
 
-async function fileExists() {
-
-	if(!fs.existsSync(path.join(__dirname, '../db/'))) {
-		await fs.mkdirSync(path.join(__dirname, '../db/'))	
-	}
-
-	sequelize.sync().then( async () =>  { 
-
-		await consumeSwapi(sequelize)
-
-	    server.get(urlApi, swapiService.get)
-	    server.post(urlApi, swapiService.create)
-	    server.put(urlApi, swapiService.update)
-	    server.delete(urlApi, swapiService.delete)
-
-	    server.listen(port, () => {
-			console.log(`BACKEND is running on port ${port}. `)
-		})
-	})	
+if(!fs.existsSync(path.join(__dirname, '../db/'))) {
+	fs.mkdirSync(path.join(__dirname, '../db/'))	
 }
 
-fileExists()
+sequelize.sync().then( async () =>  { 
+
+	await consumeSwapi(sequelize)
+
+    server.get(urlApi, swapiService.get)
+    server.post(urlApi, swapiService.create)
+    server.put(urlApi, swapiService.update)
+    server.delete(urlApi, swapiService.delete)
+
+    server.listen(port, () => {
+		console.log(`BACKEND is running on port ${port}. `)
+	})
+})
