@@ -9,6 +9,7 @@ const server = express()
 const allowCors = require('./cors')
 const Sequelize = require('sequelize')
 const path = require('path')
+const { consumeSwapi } = require('../api/swapi')
 
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
@@ -20,11 +21,15 @@ const sequelize = new Sequelize({
 	logging: false
 })
 
-const swapiService= require('../api/swapiService')(sequelize)
+const swapiService = require('../api/swapiService')(sequelize)
 
-sequelize.sync().then( () =>  {    
+sequelize.sync().then( async () =>  { 
+
+	await consumeSwapi(sequelize)
+
     server.get(urlApi, swapiService.get)
     server.post(urlApi, swapiService.create)
+    server.put(urlApi, swapiService.update)
     server.delete(urlApi, swapiService.delete)
 
     server.listen(port, () => {

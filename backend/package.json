@@ -5,7 +5,8 @@
   "main": "src/loader.js",
   "scripts": {
     "dev": "nodemon",
-    "production": "pm2 start src/loader.js --name apiSWAPI"
+    "production": "pm2 start src/loader.js --name apiSWAPI",
+    "test": "./node_modules/.bin/mocha --timeout 15000 ./src/test/*.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,12 @@
     "sqlite3": "^3.1.9"
   },
   "devDependencies": {
+    "axios": "^0.16.2",
+    "chai": "^4.1.1",
     "mocha": "^3.5.0",
-    "nodemon": "^1.11.0"
+    "nock": "^9.0.14",
+    "nodemon": "^1.11.0",
+    "request": "^2.81.0",
+    "supertest": "^3.0.0"
   }
 }
